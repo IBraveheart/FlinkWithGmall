@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <property name="LOG_HOME" value="/opt/projects/gmall_stream_2/applog/logfile"/>
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/gmall_app.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/gmall_app.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 将某一个包下日志单独打印日志 -->
+    <logger name="com.example.gmall_logger.controller.LoggerController"
+            level="info" additivity="false">
+<!--        <appender-ref ref="rollingFile"/>-->
+        <appender-ref ref="console"/>
+    </logger>
+
+    <root level="error" additivity="false">
+        <appender-ref ref="console"/>
+    </root>
+
+</configuration>
